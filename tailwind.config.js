@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-          whisper: ['Whisper', 'sans-serif'],
+          'jacquarda-bastarda': ['Jacquarda Bastarda', 'sans-serif'],
       }, 
     },
   
