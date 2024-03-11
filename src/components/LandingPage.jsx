@@ -15,6 +15,18 @@ const LandingPage = () => {
     };
 
 
+    const handleLoginSubmit = (event) =>  {
+        event.preventDefault();
+        // content here;
+    }
+
+    const handleSignupSubmit = (event) => {
+        event.preventDefault();
+        // sign up logic here
+        // send a confirmation email to user
+        // display a success message
+    }
+
 
 
    return (
@@ -26,6 +38,8 @@ const LandingPage = () => {
         <button onClick={handleSignupClick} className='border rounded-t-full px-10 text-white hover:bg-blue-800 font-whisper text-3xl'>Sign Up</button>
     </div>
     </div>
+
+    
     </div>
    )
 
