@@ -9,8 +9,7 @@ export default {
           whisper: ['Whisper', 'sans-serif'],
       }, 
     },
-  },
-
+  
   screens: {
      'xs': '375px',
      'sm': '640px',
@@ -18,7 +17,8 @@ export default {
      'lg': '1024px',
      'xl': '1280px',
   },
-
+  },
+ 
   plugins: [],
 }
 
