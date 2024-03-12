@@ -6,12 +6,12 @@ const LandingPage = () => {
 
     const handleLoginClick = () => {
         setShowLogin(true);
-        setShowSignup(true);
+        setShowSignup(false);
     };
   
     const handleSignupClick = () => {
         setShowSignup(true);
-        setShowLogin(true);
+        setShowLogin(false);
     };
 
 
@@ -38,8 +38,6 @@ const LandingPage = () => {
         <button onClick={handleSignupClick} className='border rounded-t-full px-10 text-white hover:bg-blue-800 font-whisper text-3xl'>Sign Up</button>
     </div>
     </div>
-
-    
     </div>
    )
 
