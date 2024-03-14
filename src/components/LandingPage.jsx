@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
    return (
-    <div className='flex justify-center items-center min-h-screen min-w-screen bg-cover bg-center' style={{backgroundImage: `url(${backgroundImage})`}}>
+    <div className='flex justify-center items-center min-h-screen min-w-screen bg-cover bg-center' style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPositiion: 'center',}}>
         <div className='mx-auto min-w-0'>
         <h1 className='text-center text-6xl relative bottom-40 text-white font-whisper'>WorthSport</h1>
         <div className='flex flex-col border border-pink-100 relative rounded-2xl p-36 py-8 xs:rounded-md md:rounded-lg bg-black xs:bg-opacity md:bg-opacity-75 bg-opacity-75'>
