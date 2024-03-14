@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const SignupPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -29,10 +30,11 @@ const SignupPage = () => {
         setPasswordError(false);
     };
 
-    const handlePasswordChange = () => {
-        setPassword(value);
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-        setPasswordError(!value.match(passwordRegex));
+ 
+
+    const togglePasswordVisibility = () => {
+        setPassword(!password);
+        setConfirmPassword(!confirmPassword);
     }
 
     return (
@@ -79,27 +81,38 @@ const SignupPage = () => {
                 <div className="mb-1">
                     <label htmlFor="password" className="block mb-2">Password:</label>
                     <input 
-                    type="password" 
+                    type={password ? "text" : "password"}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:border-blue-500"
                     required
                     />
+                    <button 
+                    type="button"
+                    className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                    onClick={togglePasswordVisibility}>
+                        {password ? <FiEye/> : <FiEyeOff/>}
+                    </button>
                 </div>
 
                 <div className="mb-1">
                     <label htmlFor="confirmPassword" className="block mb-2">Confirm Password:</label>
                     <input 
-                    type="password"
+                    type={password ? "text" : "password"}
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:border-blue-500"
                     required
                     />
+                    <button
+                    type="button"
+                    className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none">
+                      {confirmPassword ? <FiEye/> : <FiEyeOff/> }
+                    </button>
                 </div>
-                <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Sign Up</button>
+                <button type="/login" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
             </form>
            
