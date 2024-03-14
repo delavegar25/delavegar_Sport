@@ -21,7 +21,7 @@ const LoginPage = () => {
     return (
         <div className="bg-gray-900 min-h-screen relative">
         <div className="flex justify-center items-center">
-        <h1 className="text-4xl text-center font-bold text-black relative left-32">Login</h1>
+        <h1 className="text-4xl text-center font-bold text-gray-500 relative left-32">Login</h1>
         <form onSubmit={handleLogin}>
             <div className="relative top-40">
                 <label htmlFor="email" className="relative right-20 text-gray-500">Email Address:</label>
@@ -34,7 +34,7 @@ const LoginPage = () => {
                   required
                 />
             </div>
-             <div className="relative top-48">
+             <div className="relative top-40">
                 <label htmlFor="password" className="relative right-20 text-gray-500">Password:</label>
                 <input 
                   type={showPassword ? "text" : "password"}
@@ -52,7 +52,7 @@ const LoginPage = () => {
                     {showPassword ? <FiEyeOff /> : <FiEye/>}
                 </button>
              </div>
-                <button type="submit" className="relative top-60 text-gray-500 md:left-36 border border-gray-500 rounded-lg px-4">Login</button>
+                <button type="submit" className="relative top-60 text-gray-500 left-36 border border-gray-500 rounded-lg px-4">Login</button>
         </form>
         </div>
         </div>
