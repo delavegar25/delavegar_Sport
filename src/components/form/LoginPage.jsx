@@ -40,13 +40,13 @@ const LoginPage = () => {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
-                  className="md:relative right-20 text-black w-64 border rounded-xl"
+                  className="relative right-20 text-black w-64 border rounded-xl"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <button
                 type="button"
-                className="xs:absolute md:left-52 md:top-1/2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                className="absolute left-52 top-1/2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
                 onClick={togglePasswordVisibility}
                 >
                     {showPassword ? <FiEyeOff /> : <FiEye/>}
