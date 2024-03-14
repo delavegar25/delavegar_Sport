@@ -35,12 +35,12 @@ const LoginPage = () => {
                 />
             </div>
              <div className="relative top-48">
-                <label htmlFor="password" className="md:relative right-20 text-gray-500">Password:</label>
+                <label htmlFor="password" className="relative right-20 text-gray-500">Password:</label>
                 <input 
                   type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
-                  className="relative right-20 text-black w-64 border rounded-xl"
+                  className="relative right-20 w-64 border rounded-xl"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -52,7 +52,7 @@ const LoginPage = () => {
                     {showPassword ? <FiEyeOff /> : <FiEye/>}
                 </button>
              </div>
-                <button type="submit" className="relative top-60  md:left-36 border border-gray-500 rounded-lg px-4">Login</button>
+                <button type="submit" className="relative top-60 text-gray-500 md:left-36 border border-gray-500 rounded-lg px-4">Login</button>
         </form>
         </div>
         </div>
