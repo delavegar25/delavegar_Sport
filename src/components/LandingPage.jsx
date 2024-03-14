@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import backgroundImage from '../assets/manwar.jpg'
+import backgroundImage from '../assets/gymmm.jpg'
 import { Link } from 'react-router-dom';
 
 
