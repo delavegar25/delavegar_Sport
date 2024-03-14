@@ -34,7 +34,7 @@ const LoginPage = () => {
                   required
                 />
             </div>
-             <div className="relative top-40">
+             <div className="relative top-44">
                 <label htmlFor="password" className="relative right-20 text-gray-500">Password:</label>
                 <input 
                   type={showPassword ? "text" : "password"}
