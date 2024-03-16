@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 const SignupPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -112,10 +113,10 @@ const SignupPage = () => {
                       {confirmPassword ? <FiEye/> : <FiEyeOff/> }
                     </button>
                 </div>
-                <button type="/login" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
+                <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
+             <Link to='/login' className="block text-center text-blue-500 hover:underline">Already have an account? Login here</Link>
             </form>
-           
         </div>
     );
 }
