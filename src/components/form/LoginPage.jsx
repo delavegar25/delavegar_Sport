@@ -53,7 +53,7 @@ const LoginPage = () => {
                 className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none"
                 onClick={togglePasswordVisibility}
                 >
-                    {showPassword ? <FiEyeOff /> : <FiEye/>}
+                    {showPassword ? <FiEyeOff/> : <FiEye/>}
                 </button>  
              </div>
                 

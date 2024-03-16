@@ -93,7 +93,7 @@ const SignupPage = () => {
                     type="button"
                     className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none"
                     onClick={togglePasswordVisibility}>
-                        {password ? <FiEye/> : <FiEyeOff/>}
+                        {password ? <FiEyeOff/> : <FiEye/>}
                     </button>
                 </div>
 
@@ -110,7 +110,7 @@ const SignupPage = () => {
                     <button
                     type="button"
                     className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none">
-                      {confirmPassword ? <FiEyeOff /> : <FiEye/> }
+                      {confirmPassword ? <FiEyeOff/> : <FiEye/> }
                     </button>
                 </div>
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
