@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const SignupPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -9,6 +10,7 @@ const SignupPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
 
     const handleSignUp = (event) => {
@@ -29,14 +31,20 @@ const SignupPage = () => {
         setPassword('');
         setConfirmPassword('');
         setPasswordError(false);
+
     };
 
  
-
     const togglePasswordVisibility = () => {
         setPassword(!password);
         setConfirmPassword(!confirmPassword);
     }
+
+
+    const handleCaptchaChange = (value) => {
+        setIsCaptchaVerified(true);
+    }
+
 
     return (
         <div className="min-h-screen bg-gray-900 flex justify-center items-center relative">
@@ -113,6 +121,13 @@ const SignupPage = () => {
                       {confirmPassword ? <FiEyeOff/> : <FiEye/> }
                     </button>
                 </div>
+
+                 <ReCAPTCHA
+                  sitekey="/"
+                  onChange={handleCaptchaChange}
+                  className="mb-4"
+                 />
+
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
              <Link to='/login' className="block text-center text-blue-500 hover:underline">Already have an account? Login here</Link>
