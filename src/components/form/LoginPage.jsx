@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from 'react-icons/fi'; 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginPage = () => {
@@ -9,18 +9,23 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const history = useHistory();
 
     const handleLogin = (event) => {
         event.preventDefault();
         // implement my authentication logic;
         // after succesful authentication you can redirect the user to the next page
         // check if reCaptcha is verified
+
         if(!isCaptchaVerified){
             alert("Please verify that you are not a robot.");
             return;
         }
 
         // check if "Remember me" is checked
+        if (email === "user@example.com" && password === "password"){
+            history.push('/forum');
+
         if(rememberMe) {
           // store user credientials or token in localStorage
           localStorage.setItem('email', email);
@@ -31,8 +36,10 @@ const LoginPage = () => {
            localStorage.removeItem('email');
            localStorage.removeItem('password');
         }
-    };
-
+    } else {
+        alert("Invalid email or password. Please try again.")
+    }
+}
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     }

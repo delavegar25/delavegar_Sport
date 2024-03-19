@@ -13,7 +13,7 @@ const SignupPage = () => {
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
 
-    const handleSignUp = (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
         // perform password complexity check
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
@@ -21,8 +21,6 @@ const SignupPage = () => {
             setPasswordError(true);
             return;
         } 
-
-        // perform authentication
 
         // clear form fields after successful sign up
         setFirstName('');
