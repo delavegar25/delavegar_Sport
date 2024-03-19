@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from 'react-icons/fi'; 
 import { Link } from 'react-router-dom';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginPage = () => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-   
+    const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
     const handleLogin = (event) => {
         event.preventDefault();
         // implement my authentication logic;
-       
         // after succesful authentication you can redirect the user to the next page
+        // check if reCaptcha is verified
+        if(!isCaptchaVerified){
+            alert("Please verify that you are not a robot.");
+            return;
+        }
     };
 
     const togglePasswordVisibility = () => {
@@ -20,6 +25,10 @@ const LoginPage = () => {
     }
 
    
+    const handleCaptchaChange = (value) => {
+        setIsCaptchaVerified(true);
+    }
+
     
     return (
         <div className="bg-gray-900 min-h-screen flex justify-center items-center relative">
@@ -56,7 +65,13 @@ const LoginPage = () => {
                     {showPassword ? <FiEyeOff/> : <FiEye/>}
                 </button>  
              </div>
-                
+
+             <ReCAPTCHA 
+               sitekey="Your-site-key"
+               onChange={handleCaptchaChange}
+               className="mb-4"
+             />
+
                 <div className="flex justify-between mb-4">
                 <button type="submit" className="w-full bg-green-800 text-white rounded-md py-2 px-4 hover:bg-green-400">Login</button>
                 <Link to="/forget-password" className="text-blue-600 relative left-4 hover:underline">Forget Password?</Link>
