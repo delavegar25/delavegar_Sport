@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -11,7 +12,7 @@ const SignupPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
-
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -22,6 +23,16 @@ const SignupPage = () => {
             return;
         } 
 
+        //perform backend authentication
+        try {
+          const response = await axios.post("/api/signup", {
+             firstName,
+             lastName,
+             email,
+             password
+          });
+          setSuccessMessage(response.data.message);
+    
         // clear form fields after successful sign up
         setFirstName('');
         setLastName('');
@@ -30,6 +41,10 @@ const SignupPage = () => {
         setConfirmPassword('');
         setPasswordError(false);
 
+        } catch (error){
+            console.error("Signup failed:", error);
+            // handle signup error response from backend
+        }
     };
 
  
