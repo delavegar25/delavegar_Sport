@@ -8,6 +8,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -18,12 +19,27 @@ const LoginPage = () => {
             alert("Please verify that you are not a robot.");
             return;
         }
+
+        // check if "Remember me" is checked
+        if(rememberMe) {
+          // store user credientials or token in localStorage
+          localStorage.setItem('email', email);
+          localStorage.setItem('password', password);
+        }
+        else {
+           // clear stored creientials if "Remember me" is unchecked
+           localStorage.removeItem('email');
+           localStorage.removeItem('password');
+        }
     };
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     }
 
+    const handleRememberMeChange = () => {
+        setRememberMe(!rememberMe);
+    }
    
     const handleCaptchaChange = (value) => {
         setIsCaptchaVerified(true);
@@ -71,6 +87,18 @@ const LoginPage = () => {
                onChange={handleCaptchaChange}
                className="mb-4"
              />
+
+
+            <div className="flex items-center mb-4">
+                <input 
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+                className="mr-2"
+                 />
+                <label htmlFor="rememberMe">Remember me</label>
+                </div>
 
                 <div className="flex justify-between mb-4">
                 <button type="submit" className="w-full bg-green-800 text-white rounded-md py-2 px-4 hover:bg-green-400">Login</button>
