@@ -168,9 +168,9 @@ const SignupPage = () => {
 
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
-            </form>
-             <Link to='/login' className="overflow-hidden block text-center text-blue-500 hover:underline mt-4">Already have an account? Login here</Link>
             
+             <Link to='/login' className="overflow-hidden block text-center text-blue-500 hover:underline mt-4">Already have an account? Login here</Link>
+            </form>
         </div>
     );
 }
