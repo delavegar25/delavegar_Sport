@@ -13,6 +13,7 @@ const SignupPage = () => {
     const [passwordError, setPasswordError] = useState('');
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
+    const [passwordMatch, setPasswordMatch] = useState(true);
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -22,6 +23,13 @@ const SignupPage = () => {
             setPasswordError(true);
             return;
         } 
+
+        // check if passwords match
+        if (password !== confirmPassword) {
+            setPasswordMatch(false);
+            return;
+        }
+
 
         //perform backend authentication
         try {
@@ -40,6 +48,7 @@ const SignupPage = () => {
         setPassword('');
         setConfirmPassword('');
         setPasswordError(false);
+        setPasswordMatch(true);
 
         } catch (error){
             console.error("Signup failed:", error);
@@ -121,13 +130,17 @@ const SignupPage = () => {
                 <div className="mb-1">
                     <label htmlFor="confirmPassword" className="block mb-2">Confirm Password:</label>
                     <input 
-                    type={password ? "text" : "password"}
+                    type={confirmPassword ? "text" : "password"}
                     id="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:border-blue-500"
+                    onChange={(e) => {
+                     setConfirmPassword(e.target.value);
+                     setPasswordMatch(e.target.value === password);
+                     }}
+                    className={"w-full border ${passwordMatch ? 'border-gray-300' : 'border-red-500' } rounded-md px-3 py-3 focus:outline-none focus:border-blue-500"}
                     required
                     />
+                    {!passwordMatch && <p className="text-red-500">Passwords do not match</p>}
                     <button
                     type="button"
                     className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none">
