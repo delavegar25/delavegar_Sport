@@ -14,6 +14,9 @@ const SignupPage = () => {
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -57,9 +60,13 @@ const SignupPage = () => {
     };
 
  
-    const togglePasswordVisibility = () => {
-        setPassword(!password);
-        setConfirmPassword(!confirmPassword);
+    const togglePasswordVisibility = (field) => {
+        if (field === 'password') {
+           setPasswordVisible(!passwordVisible);
+        }
+        else if (field === 'confirmPassword'){
+            setConfirmPasswordVisible(!confirmPasswordVisible);
+        }
     }
 
 
@@ -70,7 +77,7 @@ const SignupPage = () => {
 
     return (
         <div className="min-h-screen bg-gray-900 flex justify-center items-center relative">
-            <form onSubmit={handleSignUp} className="max-w-md w-full bg-gray-600 p-8 rounded-lg">
+            <form onSubmit={handleSignUp} className="max-w-md w-full bg-gray-600 p-8 rounded-lg relative left-28">
                 <h2 className="text-4xl font-bold mb-4">
                     Sign Up
                 </h2>
@@ -111,8 +118,9 @@ const SignupPage = () => {
 
                 <div className="mb-1">
                     <label htmlFor="password" className="block mb-2">Password:</label>
+                    <div className="relative">
                     <input 
-                    type={password ? "text" : "password"}
+                    type={passwordVisible ? "text" : "password"}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -121,16 +129,18 @@ const SignupPage = () => {
                     />
                     <button 
                     type="button"
-                    className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none"
-                    onClick={togglePasswordVisibility}>
-                        {password ? <FiEyeOff/> : <FiEye/>}
+                    className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                    onClick={() => togglePasswordVisibility('password')}>
+                        {passwordVisible ? <FiEyeOff/> : <FiEye/>}
                     </button>
                 </div>
+                 </div>
 
                 <div className="mb-1">
                     <label htmlFor="confirmPassword" className="block mb-2">Confirm Password:</label>
+                    <div className="relative">
                     <input 
-                    type={confirmPassword ? "text" : "password"}
+                    type={confirmPasswordVisible ? "text" : "password"}
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => {
@@ -143,9 +153,11 @@ const SignupPage = () => {
                     {!passwordMatch && <p className="text-red-500">Passwords do not match</p>}
                     <button
                     type="button"
-                    className="relative bottom-6 left-80 transform -translate-y-1/2 text-gray-500 focus:outline-none">
-                      {confirmPassword ? <FiEyeOff/> : <FiEye/> }
+                    className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                      onClick={() => togglePasswordVisibility('confirmPassword')}>
+                      {confirmPasswordVisible ? <FiEyeOff/> : <FiEye/> }
                     </button>
+                </div>
                 </div>
 
                  <ReCAPTCHA
@@ -156,8 +168,9 @@ const SignupPage = () => {
 
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
-             <Link to='/login' className="block text-center text-blue-500 hover:underline">Already have an account? Login here</Link>
             </form>
+             <Link to='/login' className="overflow-hidden block text-center text-blue-500 hover:underline relative top-80 right-56">Already have an account? Login here</Link>
+            
         </div>
     );
 }
