@@ -3,6 +3,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 const LoginPage = () => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
@@ -13,8 +14,6 @@ const LoginPage = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        // implement my authentication logic;
-        // after succesful authentication you can redirect the user to the next page
         // check if reCaptcha is verified
 
         if(!isCaptchaVerified){
