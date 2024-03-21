@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from 'react-icons/fi'; 
-import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 
 
@@ -83,11 +82,6 @@ const LoginPage = () => {
                 </button>  
              </div>
 
-             <ReCAPTCHA 
-               sitekey="Your-site-key"
-               onChange={handleCaptchaChange}
-               className="mb-4"
-             />
 
 
             <div className="flex items-center mb-4">

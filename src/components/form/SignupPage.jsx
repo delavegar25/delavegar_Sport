@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
-import ReCAPTCHA from 'react-google-recaptcha';
+
 
 const SignupPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -11,7 +11,6 @@ const SignupPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -69,10 +68,6 @@ const SignupPage = () => {
         }
     }
 
-
-    const handleCaptchaChange = (value) => {
-        setIsCaptchaVerified(true);
-    }
 
 
     return (
@@ -160,11 +155,6 @@ const SignupPage = () => {
                 </div>
                 </div>
 
-                 <ReCAPTCHA
-                  sitekey="/"
-                  onChange={handleCaptchaChange}
-                  className="mb-4"
-                 />
 
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
