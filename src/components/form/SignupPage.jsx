@@ -32,6 +32,8 @@ const SignupPage = () => {
             return;
         }
 
+        setSuccessMessage(response.data.message);
+        
 
         //perform backend authentication
         try {
