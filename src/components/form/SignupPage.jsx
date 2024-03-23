@@ -33,7 +33,7 @@ const SignupPage = () => {
         }
 
         setSuccessMessage(response.data.message);
-        
+
 
         //perform backend authentication
         try {
@@ -44,7 +44,8 @@ const SignupPage = () => {
              password
           });
           setSuccessMessage(response.data.message);
-    
+
+
         // clear form fields after successful sign up
         setFirstName('');
         setLastName('');
@@ -54,9 +55,12 @@ const SignupPage = () => {
         setPasswordError(false);
         setPasswordMatch(true);
 
+
+        // redirect to verification page after successful signup
+        history.push('/verify-email', { email });
+
         } catch (error){
             console.error("Signup failed:", error);
-            // handle signup error response from backend
         }
     };
 
