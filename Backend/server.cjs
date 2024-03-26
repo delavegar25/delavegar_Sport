@@ -1,11 +1,13 @@
+
 // integrate the frontend and backend 
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const nodemailer = require('nodemailer');
-const randomstring = require('randomstring');
-const mysql = require('sql'); 
+
+const express = import ('express');
+const bodyParser = import ('body-parser');
+const cors = import ('cors');
+const nodemailer = import ('nodemailer');
+const randomstring = import ('randomstring');
+const mysql = import ('sql'); 
 require('dotenv').config();
 
 const app = express();
@@ -16,8 +18,11 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
+
+const { createPool } = require('mysql');
+
 // database connection
-const pool = mysql.createPool({
+const pool = createPool ({
     connectionLimit: 10, // maximum number of connections in the pool
     user: process.env.DB_USER, // MYSQL database username
     password: process.env_DB_PASSWORD, // MYSQL database password 
