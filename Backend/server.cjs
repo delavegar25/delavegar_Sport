@@ -2,20 +2,22 @@
 // integrate the frontend and backend 
 
 
-const express = import ('express');
+const express = require('express');
+const app = express();
+
 const bodyParser = import ('body-parser');
-const cors = import ('cors');
+
+const cors = require('cors');
 const nodemailer = import ('nodemailer');
 const randomstring = import ('randomstring');
 const mysql = import ('sql'); 
 require('dotenv').config();
 
-const app = express();
 const port = process.env.PORT || 5000;
 
 
 //Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 
