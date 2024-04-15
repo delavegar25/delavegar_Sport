@@ -1,6 +1,4 @@
-
 // integrate the frontend and backend 
-
 
 const express = require('express');
 const app = express();
@@ -19,7 +17,6 @@ const port = process.env.PORT || 5000;
 //Middleware
 app.use(express.json());
 app.use(cors());
-
 
 const { createPool } = require('mysql');
 
@@ -48,7 +45,7 @@ app.post('/api/signup', (req, res) => {
     (error, results) => {
         if(error) {
             console.error('Signup failed:', error);
-            res.status(500).json({ error: 'Signup failed. Please try again.' });
+            res.status(500).json({ error: 'Signup failed! Please try again.' });
         } else {
             // send verification email
             const transporter = nodemailer.createTransport({
