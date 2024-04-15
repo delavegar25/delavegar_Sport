@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useHistory } from "react";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
+
 
 
 const SignupPage = () => {
@@ -15,7 +16,9 @@ const SignupPage = () => {
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const history = useHistory();
 
+    
 
     const handleSignUp = async (event) => {
         event.preventDefault();
