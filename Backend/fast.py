@@ -16,7 +16,7 @@ db = mysql.connector.connect(
     port = "process.env.DB_PORT MYSQL" database port 
     database = "process.env.DB_NAME"  // MYSQL database name
 )
-cursor - db.cursor()
+cursor = db.cursor()
 
 
 # define data model for member signup
@@ -37,6 +37,6 @@ async def signup(member: MemberSignup):
         values = (member.firstName, member.lastName, member.email, member.password)
         cursor.execute(query, values)
         db.commit()
-        return ("message": "Signup successful")
+        return {"message": "Signup successful"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to signup:{str(e)}")
