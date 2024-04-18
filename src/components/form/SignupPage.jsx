@@ -1,4 +1,4 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ const SignupPage = () => {
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-    const history = useHistory();
+
 
     
 
@@ -60,7 +60,7 @@ const SignupPage = () => {
 
 
         // redirect to verification page after successful signup
-        history.push('/verify-email', { email });
+        
 
         } catch (error){
             console.error("Signup failed:", error);
