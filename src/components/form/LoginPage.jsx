@@ -15,9 +15,9 @@ const LoginPage = () => {
         event.preventDefault();
         // check if reCaptcha is verified
 
-        if(!isCaptchaVerified){
-            alert("Please verify that you are not a robot.");
-            return;
+       // if(!isCaptchaVerified){
+         //   alert("Please verify that you are not a robot.");
+           // return;
         }
 
         // check if "Remember me" is checked
