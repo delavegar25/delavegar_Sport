@@ -8,14 +8,15 @@ app = FastAPI()
 
 #connect to MySQL database
 
-db = mysql.connector.connect( 
+db = mysql.connector.connect (
     connectionLimit = 10, # maximum number of connections in the pool
     user = "process.env.DB_USER", # MYSQL database username
     password = "process.env_DB_PASSWORD", # MYSQL database password 
     host =  "process.env.DB_HOST", # MYSQL database host 
-    port = "process.env.DB_PORT MYSQL" # database port 
-    database = "process.env.DB_NAME"  # MYSQL database name
-)
+    port = "process.env.DB_PORT MYSQL", # database port 
+    database = "process.env.DB_NAME",  # MYSQL database name
+),
+
 cursor = db.cursor()
 
 
