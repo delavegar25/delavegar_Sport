@@ -13,8 +13,8 @@ db = mysql.connector.connect(
     user = "process.env.DB_USER", # MYSQL database username
     password = "process.env_DB_PASSWORD", # MYSQL database password 
     host =  "process.env.DB_HOST", # MYSQL database host 
-    port = "process.env.DB_PORT MYSQL" database port 
-    database = "process.env.DB_NAME"  // MYSQL database name
+    port = "process.env.DB_PORT MYSQL" # database port 
+    database = "process.env.DB_NAME"  # MYSQL database name
 )
 cursor = db.cursor()
 
