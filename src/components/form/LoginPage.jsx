@@ -32,7 +32,7 @@ const LoginPage = () => {
            localStorage.removeItem('password');
         }
         
-}
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     }
@@ -103,5 +103,5 @@ const LoginPage = () => {
         </div>
     );
 
-
+  }
 export default LoginPage;
