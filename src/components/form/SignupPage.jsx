@@ -77,7 +77,7 @@ const SignupPage = () => {
         } finally {
             setLoading(false);
         }
-    }, 5000); // 5 seconds
+    }, 2000); // 5 seconds
     };
 
  
@@ -177,8 +177,11 @@ const SignupPage = () => {
                 </div>
                 </div>
 
-                {loading && <p>Loading...</p>}
-                <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
+                
+                <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">
+                {loading ? "Creating Account..." : "Create Account" }
+                    </button>
+                {loading && <p>Loading...</p>}    
              </div>
             
              <Link to='/login' className="overflow-hidden block text-center text-blue-500 hover:underline mt-4">Already have an account? Login here</Link>
