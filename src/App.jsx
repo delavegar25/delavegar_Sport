@@ -16,7 +16,7 @@ function App() {
       <Route path='/login' element={<LoginPage />}></Route>
       <Route path='/signup' element={<SignupPage />}></Route>
       <Route path='/forget-password' element={<ForgetPasswordPage />}></Route>
-      <Route path='/verify-email' element={<VerificationPage />}></Route>
+      <Route path='/verify' element={<VerificationPage />}></Route>
       <Route path='/forum' element={<ForumPage />}></Route>
       </Routes>
     </Router>
