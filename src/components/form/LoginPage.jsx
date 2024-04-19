@@ -13,11 +13,13 @@ const LoginPage = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        // check if reCaptcha is verified
+        // Assuming authentication logic here 
+        const isAuthenticated = true;
 
-       // if(!isCaptchaVerified){
-         //   alert("Please verify that you are not a robot.");
-           // return;
+        if (!isAuthenticated){
+          alert("You are not a worthsport participant. Please sign up.");
+          return;
+        }
         }
 
         // check if "Remember me" is checked
