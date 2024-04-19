@@ -45,9 +45,9 @@ class VerificationData(BaseModel):
     
 # API endpoint for member signup
 
-@app.post("/api/signup") 
+@app.post("/api/signup", "/api/verify") 
 
-async def signup(member: MemberSignup):
+async def signup(member: MemberSignup, verification_data):
     try:
         verification_code = generate_verification_code
         
@@ -59,12 +59,15 @@ async def signup(member: MemberSignup):
         
         # send the verification code to the users mail
         verification_email[member.email] = verification_code
-        
+        stored_verification_code = verification_codes.get(verification_data.email)  
+            
         query = "INSERT INTO members (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
         values = (member.firstName, member.lastName, member.email, member.password)
         cursor.execute(query, values)
         db.commit()
-        return {"message": "Signup successful"}
+        return {"message": "Signup successful. Check your email for the verification code."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to signup:{str(e)}")
 
+        
+ 
