@@ -53,6 +53,9 @@ async def signup(member: MemberSignup):
         
         #store the verification code with the users mail
         verification_codes[member.email] = verification_code
+        # print the stored email and verification code pair in the dictionary
+        
+        print(f"Email:{member.email} VerificationCode: {verification_code}")
         
         # send the verification code to the users mail
         verification_email[member.email] = verification_code
