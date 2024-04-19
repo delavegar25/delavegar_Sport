@@ -16,12 +16,20 @@ const SignupPage = () => {
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
+    const [loading, setLoading] = useState(false);
 
     
 
     const handleSignUp = async (event) => {
         event.preventDefault();
+        // set loading state to true
+        setLoading(true);
+
+        // simulate loading for 5 seconds
+        setTimeout(async () => {
+
+        
+
         // perform password complexity check
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
         if(!password.match(passwordRegex)){
@@ -66,7 +74,10 @@ const SignupPage = () => {
 
         } catch (error){
             console.error("Signup failed:", error);
+        } finally {
+            setLoading(false);
         }
+    }, 5000); // 5 seconds
     };
 
  
@@ -166,7 +177,7 @@ const SignupPage = () => {
                 </div>
                 </div>
 
-
+                {loading && <p>Loading...</p>}
                 <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">Create Account</button>
              </div>
             

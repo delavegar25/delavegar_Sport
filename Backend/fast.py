@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel 
 from typing import Optional
 import mysql.connector
+import smtplib
 
 app = FastAPI()
 
