@@ -46,6 +46,7 @@ const SignupPage = () => {
              email,
              password
           });
+        
           setSuccessMessage(response.data.message);
 
 
@@ -60,7 +61,8 @@ const SignupPage = () => {
 
 
         // redirect to verification page after successful signup
-        
+         // send verification email
+         await axios.post("/api/send-verification-email", { email });        
 
         } catch (error){
             console.error("Signup failed:", error);
