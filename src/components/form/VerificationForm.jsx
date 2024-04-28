@@ -8,7 +8,8 @@ const VerificationForm = ({ email, onSuccess }) => {
     const handleVerification = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/verify-email', { email, code: verificationCode });
+            console.log()
+            const response = await axios.post('http://localhost:8001/api/verify-email', { email, code: verificationCode });
             onSuccess(response.data.message);
         } catch (error) {
             setError('Invalid verification code. Please try again.');

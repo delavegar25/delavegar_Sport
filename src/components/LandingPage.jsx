@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import backgroundImage from '../assets/tennis.jpg'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const LandingPage = () => {
+
+
    return (
+    
     <div className='flex justify-center items-center min-h-screen min-w-screen bg-cover bg-center' style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPositiion: 'center',}}>
         <div className='mx-auto min-w-0'>
         <h1 className='text-center text-6xl relative bottom-40 text-white font-whisper'>WorthSport</h1>
@@ -13,6 +17,7 @@ const LandingPage = () => {
         </Link>
         <Link to="/signup" className='border rounded-full relative px-6 py-3 xs:border xs:relative xs:rounded-md md:border md:rounded-lg md:relative text-white hover:bg-blue-800 text-xl'>Sign Up
         </Link>
+        
     </div>
     </div>
     </div>

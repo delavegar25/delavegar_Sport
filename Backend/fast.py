@@ -2,14 +2,35 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel 
 from typing import Optional
-import mysql.connector
+from fastapi.staticfiles import StaticFiles
+from fastapi.requests import Request
+from fastapi.templating import  Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+
+#import mysql.connector
 import random
 import string
 
 app = FastAPI()
 
-#connect to MySQL database
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_headers=['*'],
+    allow_credentials=False
+)
 
+app.mount("/assets", StaticFiles(directory="../dist/assets"), name='static')
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get('/api/health')
+async def health():
+    print('GFuck ')
+    return {'status': 'healthy'}
+
+#connect to MySQL database
+'''
 db = mysql.connector.connect (
     connectionLimit = 10, # maximum number of connections in the pool
     user = "process.env.DB_USER", # MYSQL database username
@@ -20,6 +41,7 @@ db = mysql.connector.connect (
 ),
 
 cursor = db.cursor()
+'''
 
 # function to generate a random 6 digit code 
 def generate_verification_code():
@@ -36,7 +58,12 @@ class MemberSignup(BaseModel):
     lastName: str 
     email: str 
     password: str 
-    
+
+class MemberLogin(BaseModel):
+    name: str
+    age: int
+
+
 # define data model for verification data
 class VerificationData(BaseModel):
     email: str
@@ -45,29 +72,12 @@ class VerificationData(BaseModel):
     
 # API endpoint for member signup
 
-@app.post("/api/signup", "/api/verify") 
+#@app.post("/api/signup", "/api/verify") 
 
-async def signup(member: MemberSignup, verification_data):
-    try:
-        verification_code = generate_verification_code
-        
-        #store the verification code with the users mail
-        verification_codes[member.email] = verification_code
-        # print the stored email and verification code pair in the dictionary
-        
-        print(f"Email:{member.email} VerificationCode: {verification_code}")
-        
-        # send the verification code to the users mail
-        verification_email[member.email] = verification_code
-        stored_verification_code = verification_codes.get(verification_data.email)  
-            
-        query = "INSERT INTO members (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
-        values = (member.firstName, member.lastName, member.email, member.password)
-        cursor.execute(query, values)
-        db.commit()
-        return {"message": "Signup successful. Check your email for the verification code."}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to signup:{str(e)}")
+@app.post("/api/login11") 
+async def signup(xx: MemberLogin):    
+    return {'message': "Welcome back Mr {}".format(MemberLogin.name)}
 
-        
- 
+@app.get('/api/login/{user}')
+def login(user: str, pwd: str):
+    return ('Welcome  back Mr. {}'.format(user))

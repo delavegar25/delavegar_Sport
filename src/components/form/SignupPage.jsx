@@ -1,86 +1,92 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 
 
 
 const SignupPage = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    let navigate = useNavigate();
+    const [firstName, setFirstName] = useState('Kingi');
+    const [lastName, setLastName] = useState('lords');
+    const [email, setEmail] = useState('lordsokings@as.com');
+    const [password, setPassword] = useState('6f_£4hgbnbh2132435465ASDFG');
+    const [confirmPassword, setConfirmPassword] = useState('6f_£4hgbnbh2132435465ASDFG');
+    const [passwordError, setPasswordError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [cookies, setCookie] = useCookies([])
 
+    const validatePassRegex = ()=> {
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+            if(!password.match(passwordRegex)){
+                setPasswordError(true);
+                return 
+            } 
+    }
     
-
     const handleSignUp = async (event) => {
         event.preventDefault();
         // set loading state to true
         setLoading(true);
 
         // simulate loading for 5 seconds
+        console.log('here')
         setTimeout(async () => {
+            
+            
+            // check if passwords match
+            if (password !== confirmPassword) {
+                setPasswordMatch(false);
+                return;
+            }
 
-        
+            //perform backend authentication
+          
+            try {
+                
+                let data = {'firstName': firstName , 'lastName': lastName, 'email': email, 'password': password}
+                await axios.post("http://localhost:5001/api/signup",  data,  {headers : {'Content-Type': 'application/json '}})
+                .then((response) => {
+                    setSuccessMessage(response.data.message);
 
-        // perform password complexity check
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-        if(!password.match(passwordRegex)){
-            setPasswordError(true);
-            return;
-        } 
+                }).then(()=>{
+                    setCookie('Email',email, { path: '/', maxAge: 300})
+                    setCookie('Password', password, {path: '/', maxAge:300} )
+                });
 
-        // check if passwords match
-        if (password !== confirmPassword) {
-            setPasswordMatch(false);
-            return;
-        }
-
-        setSuccessMessage(response.data.message);
-
-
-        //perform backend authentication
-        try {
-          const response = await axios.post("/api/signup", {
-             firstName,
-             lastName,
-             email,
-             password
-          });
-        
-          setSuccessMessage(response.data.message);
-
-
-        // clear form fields after successful sign up
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setPasswordError(false);
-        setPasswordMatch(true);
+                // clear form fields after successful sign up
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setPasswordError(false);
+                setPasswordMatch(true);
+                
 
 
-        // redirect to verification page after successful signup
-         // send verification email
-         await axios.post("/api/send-verification-email", { email });        
+                // redirect to verification page after successful signup
+                navigate('/verify', {replace:true});
 
-        } catch (error){
-            console.error("Signup failed:", error);
-        } finally {
-            setLoading(false);
-        }
-    }, 2000); // 5 seconds
+                // send verification email
+                //await axios.post("/api/send-verification-email", { email });     
+            
+
+            } catch (error){
+                console.error("Signup failed:", error);
+            } finally {
+                setLoading(false);
+                
+            }
+        }, 2000); // 5 seconds
     };
+    
 
- 
     const togglePasswordVisibility = (field) => {
         if (field === 'password') {
            setPasswordVisible(!passwordVisible);
@@ -136,14 +142,19 @@ const SignupPage = () => {
                 <div className="mb-1">
                     <label htmlFor="password" className="block mb-2">Password:</label>
                     <div className="relative">
+                
                     <input 
                     type={passwordVisible ? "text" : "password"}
                     id="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    
+                    
+                    onBlur={()=> validatePassRegex()}
+                    onChange={(e)=>  setPassword(e.target.value)}
                     className="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:border-blue-500"
                     required
                     />
+                    {passwordError ? "Weak  A$$ bitch": null}
                     <button 
                     type="button"
                     className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 focus:outline-none"
@@ -160,6 +171,7 @@ const SignupPage = () => {
                     type={confirmPasswordVisible ? "text" : "password"}
                     id="confirmPassword"
                     value={confirmPassword}
+                    
                     onChange={(e) => {
                      setConfirmPassword(e.target.value);
                      setPasswordMatch(e.target.value === password);
@@ -178,7 +190,10 @@ const SignupPage = () => {
                 </div>
 
                 
-                <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">
+                <button 
+                
+                type="submit" 
+                className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover-bg-blue-600">
                 {loading ? "Creating Account..." : "Create Account" }
                     </button>
                 {loading && <p>Loading...</p>}    
