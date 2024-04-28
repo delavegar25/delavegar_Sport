@@ -9,8 +9,12 @@ Currently, two official plugins are available:
 
 
 ///run this script to initialize the the database before running npm start
+
+
 psql  postgres -c 'CREATE DATABASE sportsforum' 
 
 then run this to create the users table
+
+
 psql sportsforum -a -f post.sql 
 
