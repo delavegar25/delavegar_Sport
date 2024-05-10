@@ -1,3 +1,4 @@
+// landing comp
 import React, { useState, useEffect } from 'react';
 import backgroundImage from '../assets/tennis.jpg'
 import { Link } from 'react-router-dom';
